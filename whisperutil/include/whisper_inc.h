@@ -14,6 +14,7 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include <functional>
 
 
 #endif // WHISPER_INC_H

@@ -186,7 +186,7 @@ bool whisper::Reg_SetValueString(tstring szRegPath, tstring szKey, tstring szVal
 		return false;
 	}
 
-	LSTATUS nStatus = RegSetValueEx(hRegKey, szKey.c_str(), NULL, REG_SZ, (byte *)szValue.c_str(), sizeof(tchar) * (szValue.size() + 1));
+	LSTATUS nStatus = RegSetValueEx(hRegKey, szKey.c_str(), NULL, REG_SZ, (BYTE *)szValue.c_str(), sizeof(tchar) * (szValue.size() + 1));
 	if (ERROR_SUCCESS != nStatus)
 	{
 		SetLastError(nStatus);
@@ -213,7 +213,7 @@ bool whisper::Reg_SetValueDWORD(tstring szRegPath, tstring szKey, DWORD nValue)
 		return false;
 	}
 
-	LSTATUS nStatus = RegSetValueEx(hRegKey, szKey.c_str(), NULL, REG_DWORD, (byte*)&nValue, sizeof(nValue));
+	LSTATUS nStatus = RegSetValueEx(hRegKey, szKey.c_str(), NULL, REG_DWORD, (BYTE *)&nValue, sizeof(nValue));
 	if (ERROR_SUCCESS != nStatus)
 	{
 		SetLastError(nStatus);
@@ -239,7 +239,7 @@ bool whisper::Reg_SetValueDWORD64(tstring szRegPath, tstring szKey, ULONGLONG nV
 		return false;
 	}
 
-	LSTATUS nStatus = RegSetValueEx(hRegKey, szKey.c_str(), NULL, REG_QWORD, (byte*)&nValue, sizeof(nValue));
+	LSTATUS nStatus = RegSetValueEx(hRegKey, szKey.c_str(), NULL, REG_QWORD, (BYTE *)&nValue, sizeof(nValue));
 	if (ERROR_SUCCESS != nStatus)
 	{
 		SetLastError(nStatus);
@@ -251,7 +251,7 @@ bool whisper::Reg_SetValueDWORD64(tstring szRegPath, tstring szKey, ULONGLONG nV
 	return true;
 }
 
-bool whisper::Reg_SetValueBinary(tstring szRegPath, tstring szKey, byte* pValue, size_t nBufferSize)
+bool whisper::Reg_SetValueBinary(tstring szRegPath, tstring szKey, BYTE* pValue, size_t nBufferSize)
 {
 	if (true == szRegPath.empty())
 	{
@@ -277,7 +277,7 @@ bool whisper::Reg_SetValueBinary(tstring szRegPath, tstring szKey, byte* pValue,
 	return true;
 }
 
-size_t whisper::Reg_GetValue(tstring szRegPath, tstring szKey, byte* pData, size_t nBufferSize)
+size_t whisper::Reg_GetValue(tstring szRegPath, tstring szKey, BYTE* pData, size_t nBufferSize)
 {
 	if (true == szRegPath.empty())
 	{
@@ -356,7 +356,7 @@ tstring whisper::Reg_GetValueString(tstring szRegPath, tstring szKey)
 		return _T("");
 	}
 
-	byte* pValueData = new byte[nNeedSize]{0};
+	BYTE* pValueData = new BYTE[nNeedSize]{0};
 
 	nStatus = RegQueryValueEx(hRegKey, szKey.c_str(), NULL, &nQueryType, pValueData, (DWORD*)&nNeedSize);
 	if (ERROR_SUCCESS != nStatus)
@@ -399,7 +399,7 @@ DWORD whisper::Reg_GetValueDWORD(tstring szRegPath, tstring szKey)
 		return 0;
 	}
 
-	byte* pValueData = new byte[nNeedSize]{ 0 };
+	BYTE* pValueData = new BYTE[nNeedSize]{ 0 };
 
 	nStatus = RegQueryValueEx(hRegKey, szKey.c_str(), NULL, &nQueryType, pValueData, (DWORD*)&nNeedSize);
 	if (ERROR_SUCCESS != nStatus)
@@ -442,7 +442,7 @@ ULONGLONG whisper::Reg_GetValueDWORD64(tstring szRegPath, tstring szKey)
 		return 0;
 	}
 
-	byte* pValueData = new byte[nNeedSize]{ 0 };
+	BYTE* pValueData = new BYTE[nNeedSize]{ 0 };
 
 	nStatus = RegQueryValueEx(hRegKey, szKey.c_str(), NULL, &nQueryType, pValueData, (DWORD*)&nNeedSize);
 	if (ERROR_SUCCESS != nStatus)

@@ -16,10 +16,10 @@ namespace whisper
 	bool Reg_SetValueString(tstring szRegPath, tstring szKey, tstring szValue);
 	bool Reg_SetValueDWORD(tstring szRegPath, tstring szKey, DWORD nValue);
 	bool Reg_SetValueDWORD64(tstring szRegPath, tstring szKey, ULONGLONG nValue);
-	bool Reg_SetValueBinary(tstring szRegPath, tstring szKey, byte* pValue, size_t nBufferSize);
+	bool Reg_SetValueBinary(tstring szRegPath, tstring szKey, BYTE* pValue, size_t nBufferSize);
 
 	size_t Reg_GetValueSize(tstring szRegPath, tstring szKey);
-	size_t Reg_GetValue(tstring szRegPath, tstring szKey, byte* pData, size_t nBufferSize);
+	size_t Reg_GetValue(tstring szRegPath, tstring szKey, BYTE* pData, size_t nBufferSize);
 
 	tstring Reg_GetValueString(tstring szRegPath, tstring szKey);
 	DWORD Reg_GetValueDWORD(tstring szRegPath, tstring szKey);

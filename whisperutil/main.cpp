@@ -5,22 +5,15 @@ using namespace std;
 
 int main()
 {
-	bool error = false;
-	DWORD dwError = ERROR_SUCCESS;
-
-	tstring szPath = LR"(HKEY_CURRENT_USER\SOFTWARE\7-Zip)";
-	tstring szKey = LR"(hello)";
-	tstring szValue = LR"(°∞whisperutil.exe°±(Win32): “—º”‘ÿ°∞C:\Windows\SysWOW64\kernel.appcore.dll°±°£)";
-	DWORD nValue = 32654;
-
-	error = whisper::Reg_DelKey(szPath, szKey);
-	if (error)
+	DWORD nSessionID = 0;
+	bool bError = whisper::SmartProcessIdToSessionId(11548, &nSessionID);
+	if (bError)
 	{
-		tcout << L"success";
+		tcout << L"success: " << nSessionID << endl;
 	}
 	else
 	{
-		tcout << L"failed...";
+		tcout << L"failed..." << endl;
 	}
 
 	system("pause");

@@ -8,6 +8,7 @@
 #include "whisper_path.h"
 #include "whisper_service.h"
 #include "whisper_register.h"
+#include "whisper_process.h"
 
 namespace whisper {
 
