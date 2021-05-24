@@ -13,9 +13,15 @@ int main()
 	tstring szValue = LR"(°∞whisperutil.exe°±(Win32): “—º”‘ÿ°∞C:\Windows\SysWOW64\kernel.appcore.dll°±°£)";
 	DWORD nValue = 32654;
 
-	ULONGLONG nData = whisper::Reg_GetValueDWORD64(szPath, szKey);
-	tcout << nData << endl;
-
+	error = whisper::Reg_DelKey(szPath, szKey);
+	if (error)
+	{
+		tcout << L"success";
+	}
+	else
+	{
+		tcout << L"failed...";
+	}
 
 	system("pause");
 	return 0;

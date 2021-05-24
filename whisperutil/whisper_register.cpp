@@ -459,3 +459,24 @@ ULONGLONG whisper::Reg_GetValueDWORD64(tstring szRegPath, tstring szKey)
 	SetLastError(WHISPER_ERR_SUCCESS);
 	return nValue;
 }
+
+bool whisper::Reg_DelKey(tstring szRegPath, tstring szKey)
+{
+	HKEY hRegKey = Reg_GetKeyHandle(szRegPath);
+	if (hRegKey == NULL)
+	{
+		return false;
+	}
+
+	LSTATUS nStatus = RegDeleteValue(hRegKey, szKey.c_str());
+	if (ERROR_SUCCESS != nStatus)
+	{
+		RegCloseKey(hRegKey);
+		SetLastError(nStatus);
+		return false;
+	}
+
+	RegCloseKey(hRegKey);
+	SetLastError(WHISPER_ERR_SUCCESS);
+	return true;
+}

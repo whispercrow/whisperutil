@@ -25,6 +25,8 @@ namespace whisper
 	DWORD Reg_GetValueDWORD(tstring szRegPath, tstring szKey);
 	ULONGLONG Reg_GetValueDWORD64(tstring szRegPath, tstring szKey);
 
+	bool Reg_DelKey(tstring szRegPath, tstring szKey);
+
 
 #ifdef WHISPER_REGISTER_INTERNAL
 	HKEY Reg_GetBaseHKey(tstring szRegKeyPath);
