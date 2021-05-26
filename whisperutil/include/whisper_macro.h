@@ -7,6 +7,8 @@
 #define tchar				wchar_t
 #define tstring				wstring
 #define tcout				wcout
+#define tistream			wistream
+#define tostream			wostream
 #define tstringstream		wstringstream
 #define tostringstream		wostringstream
 #define tistringstream		wistringstream
@@ -19,6 +21,8 @@
 #define tchar				char
 #define tstring				string
 #define tcout				cout
+#define tistream			istream
+#define tostream			ostream
 #define tstringstream		stringstream
 #define tostringstream		ostringstream
 #define tistringstream		istringstream

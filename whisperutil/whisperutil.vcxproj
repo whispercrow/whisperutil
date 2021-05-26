@@ -159,6 +159,7 @@
     <ClInclude Include="include\whisper_codecvt.h" />
     <ClInclude Include="include\whisper_errorn.h" />
     <ClInclude Include="include\whisper_inc.h" />
+    <ClInclude Include="include\whisper_logger.hpp" />
     <ClInclude Include="include\whisper_macro.h" />
     <ClInclude Include="include\whisper_path.h" />
     <ClInclude Include="include\whisper_process.h" />

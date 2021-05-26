@@ -10,6 +10,7 @@
 #include "whisper_register.h"
 #include "whisper_process.h"
 #include "whisper_codecvt.h"
+#include "whisper_logger.hpp"
 
 namespace whisper {
 
