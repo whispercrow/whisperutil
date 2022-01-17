@@ -595,46 +595,47 @@ bool whisper::Service_Stop(const tchar* szServiceName)
 				dwLastError = WHISPER_ERR_TIMEOUT;
 				__leave;
 			}
+		}
 
 #if 0
-			StopDependentServices(szServiceName);
+		StopDependentServices(szServiceName);
 #endif 
 
-			bError = ControlService(hService, SERVICE_CONTROL_STOP, (LPSERVICE_STATUS)&ServiceStatus);
+		bError = ControlService(hService, SERVICE_CONTROL_STOP, (LPSERVICE_STATUS)&ServiceStatus);
+		if (FALSE == bError)
+		{
+			dwLastError = GetLastError();
+			__leave;
+		}
+
+		while (ServiceStatus.dwCurrentState != SERVICE_STOPPED)
+		{
+			Sleep(ServiceStatus.dwWaitHint);
+
+			bError = QueryServiceStatusEx(
+				hService,
+				SC_STATUS_PROCESS_INFO,
+				(LPBYTE)&ServiceStatus,
+				sizeof(SERVICE_STATUS_PROCESS),
+				&dwBytesNeeded);
 			if (FALSE == bError)
 			{
 				dwLastError = GetLastError();
 				__leave;
 			}
 
-			while (ServiceStatus.dwCurrentState != SERVICE_STOPPED)
+			if (ServiceStatus.dwCurrentState == SERVICE_STOPPED)
+				break;
+
+			if (GetTickCount64() - dwStartTime > dwTimeout)
 			{
-				Sleep(ServiceStatus.dwWaitHint);
-
-				bError = QueryServiceStatusEx(
-					hService,
-					SC_STATUS_PROCESS_INFO,
-					(LPBYTE)&ServiceStatus,
-					sizeof(SERVICE_STATUS_PROCESS),
-					&dwBytesNeeded);
-				if (FALSE == bError)
-				{
-					dwLastError = GetLastError();
-					__leave;
-				}
-
-				if (ServiceStatus.dwCurrentState == SERVICE_STOPPED)
-					break;
-
-				if (GetTickCount64() - dwStartTime > dwTimeout)
-				{
-					dwLastError = WHISPER_ERR_TIMEOUT;
-					__leave;
-				}
+				dwLastError = WHISPER_ERR_TIMEOUT;
+				__leave;
 			}
-
-			bReturn = true;
 		}
+
+		bReturn = true;
+		
 	}
 	__finally
 	{
